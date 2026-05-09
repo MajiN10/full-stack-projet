@@ -1,0 +1,117 @@
+<!-- Hero Banner -->
+<div class="hero-banner">
+  <div class="container">
+    <h1><i class="bi bi-bag-heart me-2"></i>Welcome to E-Store</h1>
+    <p>Discover our curated collection of quality products.</p>
+    <div class="d-flex hero-search">
+      <input type="text" class="form-control" placeholder="Search for products..."
+             [(ngModel)]="keyword" (keyup.enter)="onSearch()">
+      <button (click)="onSearch()"><i class="bi bi-search me-1"></i>Search</button>
+    </div>
+  </div>
+</div>
+
+<div class="container pb-5">
+  <!-- Category Pills -->
+  <div class="d-flex category-pills mb-4">
+    <button class="cat-pill" [class.active]="selectedCategoryId === null"
+            (click)="onCategoryFilter(null)">
+      <i class="bi bi-grid-fill"></i> All
+    </button>
+    <button *ngFor="let cat of categories" class="cat-pill"
+            [class.active]="selectedCategoryId === cat.id"
+            (click)="onCategoryFilter(cat.id)">
+      <i class="bi {{ getCatIcon(cat.name) }}"></i> {{ cat.name }}
+    </button>
+  </div>
+
+  <!-- Results count -->
+  <p class="text-muted small mb-3">
+    <strong>{{ products.length }}</strong> product{{ products.length !== 1 ? 's' : '' }} found
+  </p>
+
+  <!-- Product Grid -->
+  <div class="row g-4" *ngIf="products.length > 0">
+    <div class="col-md-4 col-sm-6" *ngFor="let p of products">
+      <div class="product-card card">
+        <div class="img-wrapper position-relative">
+          <img [src]="p.imageUrl" class="card-img-top"
+               [alt]="p.name"
+               onerror="this.onerror=null;this.src='https://via.placeholder.com/400x260?text=No+Image'">
+          <span class="badge-cat" *ngIf="p?.category">{{ p?.category?.name }}</span>
+        </div>
+        <div class="card-body d-flex flex-column p-3">
+          <h6 class="fw-700 mb-1" style="font-weight:600;">{{ p.name }}</h6>
+          <p class="text-muted small flex-grow-1 mb-2" style="font-size:0.82rem;">{{ p.description }}</p>
+
+          <div class="d-flex justify-content-between align-items-center mt-auto">
+            <span class="price-tag">{{ p.price }} €</span>
+            <button (click)="onAddToCart(p.id)" class="btn-cart">
+              <i class="bi bi-cart-plus me-1"></i>Add
+            </button>
+          </div>
+          <hr class="my-2" style="opacity:0.1;">
+
+          <!-- Reviews toggle -->
+          <div class="d-flex gap-2">
+            <button class="btn btn-link btn-sm p-0 text-muted" style="font-size:0.8rem;"
+                    (click)="loadReviews(p.id!)">
+              <i class="bi bi-star me-1"></i>Reviews
+            </button>
+            <span class="text-muted">·</span>
+            <button class="btn btn-link btn-sm p-0 text-muted" style="font-size:0.8rem;"
+                    (click)="toggleReviewForm(p.id!)">
+              <i class="bi bi-pencil me-1"></i>Write
+            </button>
+          </div>
+
+          <!-- Review form -->
+          <div *ngIf="showReviewFormMap[p.id!]" class="mt-2 p-2 border rounded" style="border-radius:10px!important;background:#f8f9fc;">
+            <input type="text" class="form-control form-control-sm mb-1"
+                   placeholder="Your name" [(ngModel)]="newReviewMap[p.id!].authorName">
+            <div class="d-flex align-items-center gap-2 mb-1">
+              <label class="small mb-0 text-muted">Rating:</label>
+              <select class="form-select form-select-sm w-auto"
+                      [(ngModel)]="newReviewMap[p.id!].rating">
+                <option [value]="5">★★★★★</option>
+                <option [value]="4">★★★★☆</option>
+                <option [value]="3">★★★☆☆</option>
+                <option [value]="2">★★☆☆☆</option>
+                <option [value]="1">★☆☆☆☆</option>
+              </select>
+            </div>
+            <textarea class="form-control form-control-sm mb-1" rows="2"
+                      placeholder="Your thoughts..." [(ngModel)]="newReviewMap[p.id!].comment"></textarea>
+            <button class="btn btn-sm w-100" style="background:#1a1a2e;color:white;border-radius:8px;"
+                    (click)="submitReview(p.id!)">
+              <i class="bi bi-send me-1"></i>Submit
+            </button>
+          </div>
+
+          <!-- Reviews list -->
+          <div *ngIf="reviewsMap[p.id!]" class="mt-2">
+            <div *ngIf="reviewsMap[p.id!].length === 0" class="small text-muted fst-italic">No reviews yet.</div>
+            <div *ngFor="let rev of reviewsMap[p.id!]" class="review-box">
+              <div class="d-flex justify-content-between align-items-center">
+                <strong style="font-size:0.8rem;">{{ rev.authorName }}</strong>
+                <span class="stars" style="font-size:0.78rem;">
+                  {{ '★'.repeat(rev.rating) }}{{ '☆'.repeat(5 - rev.rating) }}
+                </span>
+              </div>
+              <p class="mb-0 text-muted fst-italic" style="font-size:0.78rem;">"{{ rev.comment }}"</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty state -->
+  <div *ngIf="products.length === 0" class="text-center py-5">
+    <i class="bi bi-search" style="font-size:3rem;color:#ccc;"></i>
+    <h5 class="mt-3 text-muted">No products found</h5>
+    <button class="btn btn-outline-secondary mt-2" (click)="onCategoryFilter(null)">
+      Clear filters
+    </button>
+  </div>
+</div>

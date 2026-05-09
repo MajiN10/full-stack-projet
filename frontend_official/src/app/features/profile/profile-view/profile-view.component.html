@@ -1,0 +1,58 @@
+<div class="container py-5" style="max-width:640px;">
+  <h2 class="section-title"><i class="bi bi-person-circle me-2"></i>My Profile</h2>
+
+  <!-- Account info card -->
+  <div *ngIf="user" class="profile-card card mb-4">
+    <div class="profile-header d-flex align-items-center gap-3">
+      <div style="width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,0.15);
+                  display:flex;align-items:center;justify-content:center;">
+        <i class="bi bi-person-fill" style="font-size:1.6rem;color:white;"></i>
+      </div>
+      <div>
+        <div class="fw-700 fs-5">{{ user.firstName }} {{ user.lastName }}</div>
+        <div style="color:rgba(255,255,255,0.65);font-size:0.88rem;">{{ user.email }}</div>
+      </div>
+    </div>
+    <div class="card-body p-4">
+      <div class="row g-3">
+        <div class="col-6">
+          <label class="form-label small fw-600 text-muted">PHONE</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-telephone"></i></span>
+            <input type="text" class="form-control" [(ngModel)]="profile.phone" placeholder="+212 6 00 00 00">
+          </div>
+        </div>
+        <div class="col-6">
+          <label class="form-label small fw-600 text-muted">CITY</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-geo-alt"></i></span>
+            <input type="text" class="form-control" [(ngModel)]="profile.city" placeholder="Casablanca">
+          </div>
+        </div>
+        <div class="col-12">
+          <label class="form-label small fw-600 text-muted">ADDRESS</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-house"></i></span>
+            <input type="text" class="form-control" [(ngModel)]="profile.address" placeholder="Street address">
+          </div>
+        </div>
+        <div class="col-12">
+          <label class="form-label small fw-600 text-muted">COUNTRY</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-globe"></i></span>
+            <input type="text" class="form-control" [(ngModel)]="profile.country" placeholder="Morocco">
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="saveSuccess" class="alert alert-success mt-3 rounded-3 py-2">
+        <i class="bi bi-check-circle me-2"></i>Profile saved successfully!
+      </div>
+
+      <button class="btn w-100 mt-3 fw-600" style="background:#1a1a2e;color:white;border-radius:12px;padding:12px;"
+              (click)="saveProfile()">
+        <i class="bi bi-floppy me-2"></i>Save Changes
+      </button>
+    </div>
+  </div>
+</div>

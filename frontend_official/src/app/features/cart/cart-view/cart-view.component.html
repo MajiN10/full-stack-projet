@@ -1,0 +1,77 @@
+<div class="container py-5">
+  <h2 class="section-title"><i class="bi bi-cart3 me-2"></i>Shopping Cart</h2>
+
+  <div *ngIf="!cart || cart.items?.length === 0" class="text-center py-5">
+    <i class="bi bi-cart-x" style="font-size:4rem;color:#ccc;"></i>
+    <h5 class="mt-3 text-muted">Your cart is empty</h5>
+    <a routerLink="/products" class="btn mt-3" style="background:#1a1a2e;color:white;border-radius:50px;padding:10px 28px;">
+      <i class="bi bi-arrow-left me-2"></i>Continue Shopping
+    </a>
+  </div>
+
+  <div *ngIf="cart && cart.items?.length > 0">
+    <div class="card border-0 rounded-4 shadow-sm overflow-hidden mb-4">
+      <table class="table cart-table mb-0">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Unit Price</th>
+            <th>Quantity</th>
+            <th>Subtotal</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of cart.items">
+            <td>
+              <div class="fw-600">{{ item.product?.name }}</div>
+              <div class="text-muted small">{{ item.product?.category?.name }}</div>
+            </td>
+            <td class="fw-500">{{ item.unitPrice }} €</td>
+            <td>
+              <div class="d-flex align-items-center gap-2">
+                <button class="qty-btn" (click)="updateQuantity(item.id, item.quantity - 1)">−</button>
+                <span class="fw-600" style="min-width:20px;text-align:center;">{{ item.quantity }}</span>
+                <button class="qty-btn" (click)="updateQuantity(item.id, item.quantity + 1)">+</button>
+              </div>
+            </td>
+            <td class="fw-700" style="color:#1a1a2e;">{{ (item.unitPrice * item.quantity).toFixed(2) }} €</td>
+            <td>
+              <button class="btn btn-sm btn-outline-danger" style="border-radius:50px;"
+                      (click)="removeItem(item.id)">
+                <i class="bi bi-trash3"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Order summary -->
+    <div class="row justify-content-end">
+      <div class="col-md-4">
+        <div class="card border-0 rounded-4 shadow-sm p-4">
+          <h6 class="fw-700 mb-3">Order Summary</h6>
+          <div class="d-flex justify-content-between mb-2 text-muted small">
+            <span>Subtotal</span><span>{{ total.toFixed(2) }} €</span>
+          </div>
+          <div class="d-flex justify-content-between mb-2 text-muted small">
+            <span>Shipping</span><span class="text-success">Free</span>
+          </div>
+          <hr>
+          <div class="d-flex justify-content-between fw-700 fs-5 mb-3">
+            <span>Total</span><span>{{ total.toFixed(2) }} €</span>
+          </div>
+          <button (click)="onCheckout()" class="btn w-100 fw-600"
+                  style="background:linear-gradient(135deg,#1a1a2e,#0f3460);color:white;border-radius:12px;padding:12px;">
+            <i class="bi bi-bag-check me-2"></i>Place Order
+          </button>
+          <a routerLink="/products" class="btn btn-outline-secondary w-100 mt-2"
+             style="border-radius:12px;padding:10px;">
+            <i class="bi bi-arrow-left me-1"></i>Continue Shopping
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

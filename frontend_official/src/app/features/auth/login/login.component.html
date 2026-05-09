@@ -1,0 +1,37 @@
+<div class="auth-wrapper">
+  <div class="auth-card">
+    <div class="text-center mb-4">
+      <div class="auth-logo"><i class="bi bi-bag-heart-fill" style="color:#4f8ef7;"></i> E-<span>Store</span></div>
+      <p class="text-muted small mt-1">Sign in to your account</p>
+    </div>
+    <form (ngSubmit)="onLogin()">
+      <div class="mb-3">
+        <label class="form-label fw-500 small">Email address</label>
+        <div class="input-group">
+          <span class="input-group-text" style="border-radius:10px 0 0 10px;border-color:#e2e8f0;">
+            <i class="bi bi-envelope text-muted"></i>
+          </span>
+          <input type="email" name="email" class="form-control" style="border-radius:0 10px 10px 0;"
+                 placeholder="admin@estore.com" [(ngModel)]="credentials.email" required>
+        </div>
+      </div>
+      <div class="mb-4">
+        <label class="form-label fw-500 small">Password</label>
+        <div class="input-group">
+          <span class="input-group-text" style="border-radius:10px 0 0 10px;border-color:#e2e8f0;">
+            <i class="bi bi-lock text-muted"></i>
+          </span>
+          <input type="password" name="password" class="form-control" style="border-radius:0 10px 10px 0;"
+                 placeholder="••••••••" [(ngModel)]="credentials.password" required>
+        </div>
+      </div>
+      <button type="submit" class="btn-auth mb-3">
+        <i class="bi bi-box-arrow-in-right me-2"></i>Sign In
+      </button>
+      <p class="text-center small text-muted mb-0">
+        Don't have an account?
+        <a routerLink="/register" style="color:#4f8ef7;font-weight:600;">Register here</a>
+      </p>
+    </form>
+  </div>
+</div>

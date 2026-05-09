@@ -1,0 +1,202 @@
+* { box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #f8f9fc;
+  color: #1a1a2e;
+  margin: 0;
+}
+
+/* ── Navbar ───────────────────────────────────────────── */
+.navbar-brand span.brand-e { color: #4f8ef7; font-weight: 800; }
+.navbar-brand span.brand-store { color: #fff; font-weight: 600; }
+.nav-link { font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+.nav-link:hover { color: #4f8ef7 !important; }
+
+/* ── Hero Banner ──────────────────────────────────────── */
+.hero-banner {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
+  color: white;
+  padding: 60px 0 50px;
+  margin-bottom: 40px;
+}
+.hero-banner h1 { font-size: 2.4rem; font-weight: 700; margin-bottom: 10px; }
+.hero-banner p  { font-size: 1.05rem; color: #a0b4d6; margin-bottom: 24px; }
+.hero-search { max-width: 520px; }
+.hero-search .form-control {
+  border-radius: 50px 0 0 50px;
+  border: none;
+  padding: 12px 20px;
+  font-size: 0.95rem;
+}
+.hero-search .btn {
+  border-radius: 0 50px 50px 0;
+  padding: 12px 24px;
+  background: #4f8ef7;
+  border: none;
+  color: white;
+  font-weight: 600;
+}
+.hero-search .btn:hover { background: #3a7ae8; }
+
+/* ── Category Pills ───────────────────────────────────── */
+.category-pills { gap: 10px; flex-wrap: wrap; }
+.cat-pill {
+  border: 2px solid #dee2e6;
+  background: white;
+  border-radius: 50px;
+  padding: 6px 18px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: #444;
+}
+.cat-pill:hover, .cat-pill.active {
+  background: #1a1a2e;
+  border-color: #1a1a2e;
+  color: white;
+}
+.cat-pill i { margin-right: 5px; }
+
+/* ── Product Card ─────────────────────────────────────── */
+.product-card {
+  border: none;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.25s, box-shadow 0.25s;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  background: white;
+  height: 100%;
+}
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.13);
+}
+.product-card .card-img-top {
+  height: 200px;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+.product-card:hover .card-img-top { transform: scale(1.04); }
+.product-card .img-wrapper { overflow: hidden; }
+.product-card .badge-cat {
+  position: absolute;
+  top: 12px; left: 12px;
+  background: rgba(15,52,96,0.82);
+  color: white;
+  font-size: 0.72rem;
+  padding: 4px 10px;
+  border-radius: 50px;
+  backdrop-filter: blur(4px);
+}
+.stock-badge {
+  font-size: 0.75rem;
+  padding: 3px 9px;
+  border-radius: 50px;
+}
+.price-tag { font-size: 1.3rem; font-weight: 700; color: #1a1a2e; }
+
+/* ── Buttons ──────────────────────────────────────────── */
+.btn-cart {
+  background: #1a1a2e;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 8px 18px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+.btn-cart:hover { background: #4f8ef7; color: white; }
+
+/* ── Auth Pages ───────────────────────────────────────── */
+.auth-wrapper {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.auth-card {
+  background: white;
+  border-radius: 20px;
+  padding: 40px 36px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+.auth-card .auth-logo { font-size: 1.8rem; font-weight: 800; margin-bottom: 4px; }
+.auth-card .auth-logo span { color: #4f8ef7; }
+.auth-card .form-control {
+  border-radius: 10px;
+  border: 1.5px solid #e2e8f0;
+  padding: 10px 14px;
+  transition: border-color 0.2s;
+}
+.auth-card .form-control:focus {
+  border-color: #4f8ef7;
+  box-shadow: 0 0 0 3px rgba(79,142,247,0.15);
+}
+.btn-auth {
+  background: linear-gradient(135deg, #1a1a2e, #0f3460);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  width: 100%;
+  transition: opacity 0.2s;
+}
+.btn-auth:hover { opacity: 0.88; color: white; }
+
+/* ── Cart / Orders ────────────────────────────────────── */
+.section-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 3px solid #4f8ef7;
+  display: inline-block;
+}
+.cart-table thead { background: #1a1a2e; color: white; }
+.cart-table thead th { font-weight: 500; font-size: 0.9rem; padding: 14px 16px; }
+.cart-table tbody td { padding: 14px 16px; vertical-align: middle; }
+.qty-btn {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  border: 1.5px solid #dee2e6;
+  background: white;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.qty-btn:hover { background: #1a1a2e; color: white; border-color: #1a1a2e; }
+.order-card { border: none; border-radius: 14px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); }
+.order-card .card-header {
+  background: linear-gradient(135deg, #1a1a2e, #0f3460);
+  color: white;
+  border-radius: 14px 14px 0 0 !important;
+  padding: 14px 20px;
+}
+
+/* ── Reviews ──────────────────────────────────────────── */
+.review-box {
+  background: #f8f9fc;
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-bottom: 6px;
+  border-left: 3px solid #4f8ef7;
+}
+.stars { color: #f59e0b; }
+
+/* ── Profile ──────────────────────────────────────────── */
+.profile-card { border: none; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+.profile-header {
+  background: linear-gradient(135deg, #1a1a2e, #0f3460);
+  color: white;
+  border-radius: 16px 16px 0 0;
+  padding: 20px 24px;
+}
